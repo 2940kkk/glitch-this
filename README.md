@@ -155,3 +155,26 @@ That's neat, but how about some GIFs? Here's some GIFs from the same image:-
 #### Glitched GIF - Level 8:-
 
 ![glitched_gif8](https://raw.githubusercontent.com/TotallyNotChase/glitch-this/master/example/glitched8.gif)
+## 双图闪烁 GIF（TV Flicker GIF）
+
+在 [glitch_this](file:///Users/cocoli/Desktop/digital%20media%20art/glitch-this_副本/glitch_this/glitch_this.py)
+故障效果之外，新增了一个独立功能：**上传 A、B 两张图，输出一段"闪烁时透出 B"的 GIF**，
+并复用现有 [tv_static_glitch.py](file:///Users/cocoli/Desktop/digital%20media%20art/glitch-this_副本/tv_static_glitch.py)
+的雪花滤镜。
+
+### 基本用法
+
+```bash
+# 最简单：A 和 B 都是静态图，输出 <A_base>_flicker.gif
+python tv_flicker_gif.py example/a.png example/b.png
+
+# 完整参数
+python tv_flicker_gif.py example/a.png example/b.gif \
+    --flicker-hz 12 \
+    --snow-intensity 0.4 \
+    --b-opacity 0.7 \
+    --total-frames 60 \
+    --duration-ms 50 \
+    --preview \
+    -o example/flicker.gif \
+    -f

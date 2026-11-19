@@ -1,0 +1,75 @@
+import argparse
+import os
+from glitch_this import ImageGlitcher
+
+def main():
+    parser = argparse.ArgumentParser(description="Glitch an image")
+    parser.add_argument("input_path", type=str, help="输入图片路径")
+    parser.add_argument("num_glitches", type=int, help="glitch 次数")
+    parser.add_argument("-o", "--output", type=str, default=None,
+                        help="输出文件名（不含扩展名）")
+    parser.add_argument("-f", "--file_format", type=str, default="png",
+                        help="输出格式: png 或 jpg")
+    args = parser.parse_args()
+
+    glitcher = ImageGlitcher()
+
+    input_dir = os.path.dirname(args.input_path)
+    basename = os.path.splitext(os.path.basename(args.input_path))[0]
+
+    # 如果用户指定了 output 名称，则使用；否则自动生成
+    if args.output:
+        name_prefix = args.output
+    else:
+        name_prefix = basename
+
+    for i in range(args.num_glitches):
+        glitch_img = glitcher.glitch_image(
+            args.input_path, 2, color_shift=True
+        )
+        out_path = os.path.join(
+            input_dir,
+            f"{name_prefix}_{i+1}.{args.file_format}"
+        )
+        glitch_img.save(out_path)
+        print(f"Saved: {out_path}")
+
+if __name__ == "__main__":
+    main()import argparse
+import os
+from glitch_this import ImageGlitcher
+
+def main():
+    parser = argparse.ArgumentParser(description="Glitch an image")
+    parser.add_argument("input_path", type=str, help="输入图片路径")
+    parser.add_argument("num_glitches", type=int, help="glitch 次数")
+    parser.add_argument("-o", "--output", type=str, default=None,
+                        help="输出文件名（不含扩展名）")
+    parser.add_argument("-f", "--file_format", type=str, default="png",
+                        help="输出格式: png 或 jpg")
+    args = parser.parse_args()
+
+    glitcher = ImageGlitcher()
+
+    input_dir = os.path.dirname(args.input_path)
+    basename = os.path.splitext(os.path.basename(args.input_path))[0]
+
+    # 如果用户指定了 output 名称，则使用；否则自动生成
+    if args.output:
+        name_prefix = args.output
+    else:
+        name_prefix = basename
+
+    for i in range(args.num_glitches):
+        glitch_img = glitcher.glitch_image(
+            args.input_path, 2, color_shift=True
+        )
+        out_path = os.path.join(
+            input_dir,
+            f"{name_prefix}_{i+1}.{args.file_format}"
+        )
+        glitch_img.save(out_path)
+        print(f"Saved: {out_path}")
+
+if __name__ == "__main__":
+    main()
